@@ -5,14 +5,13 @@ var models = require('../models');
 module.exports = {
   messages: {
     get: function (req, res) {
-      var data = req.body;
-      models.messages.get(data, (err, task) => {
+      models.messages.get((err, task) => {
         if (err) {
           res.send(err);
         } else {
           res.send(task);
         }
-      })
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       var data = req.body;
@@ -22,25 +21,31 @@ module.exports = {
         } else {
           res.send(task);
         }
-      })
+      });
     } // a function which handles posting a message to the database
   },
 
   users: {
     // Ditto as above
     get: function (req, res) {
-
-
-    },
-    post: function (req, res) {
-      var data = req.body;
-      models.users.post(data, (err,task) => {
+      models.users.get((err, task) => {
         if (err) {
           res.send(err);
         } else {
           res.send(task);
         }
       })
+    },
+    post: function (req, res) {
+      console.log(data);
+      var data = req.body;
+      models.users.post(data, (err,task) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(data);
+        }
+      });
     }
   }
 };
